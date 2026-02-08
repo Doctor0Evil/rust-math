@@ -81,3 +81,48 @@ rust-math is oriented toward **useful** math:
 - Encourage workflows where AI chats and humans collaborate on math that serves concrete goals—engineering, science, finance, design, or education.
 
 By combining Rust’s safety and performance with math-aware, AI-friendly APIs, rust-math aims to become a durable, public “math backbone” that any AI-chat system can rely on for high-quality, inspectable computations.
+
+
+rust-math/
+├─ Cargo.toml
+├─ rust-toolchain.toml
+├─ README.md
+├─ LICENSE
+├─ .gitignore
+├─ .github/
+│  └─ workflows/
+│     └─ ci.yml
+├─ config/
+│  └─ default.toml
+├─ src/
+│  ├─ main.rs
+│  ├─ lib.rs
+│  ├─ config.rs
+│  ├─ error.rs
+│  ├─ routes/
+│  │  ├─ mod.rs
+│  │  ├─ health.rs
+│  │  ├─ symbolic.rs
+│  │  ├─ numeric.rs
+│  │  ├─ render.rs
+│  │  └─ meta.rs
+│  ├─ math/
+│  │  ├─ mod.rs
+│  │  ├─ parse.rs
+│  │  ├─ simplify.rs
+│  │  ├─ differentiate.rs
+│  │  ├─ integrate.rs
+│  │  ├─ evaluate.rs
+│  │  ├─ matrix.rs
+│  │  └─ stats.rs
+│  ├─ models/
+│  │  ├─ mod.rs
+│  │  ├─ api.rs
+│  │  └─ math.rs
+│  └─ telemetry/
+│     ├─ mod.rs
+│     ├─ logging.rs
+│     └─ tracing.rs
+└─ tests/
+   ├─ integration_symbolic.rs
+   └─ integration_numeric.rs
