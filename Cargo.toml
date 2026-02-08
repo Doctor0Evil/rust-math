@@ -4,11 +4,18 @@ version = "0.1.0"
 edition = "2021"
 description = "Public Rust-based math service for symbolic and numeric computations, designed for AI-chat integration."
 license = "MIT"
-repository = "https://github.com/your-org/rust-math"
+repository = "https://github.com/Doctor0Evil/rust-math"
 keywords = ["math", "symbolic", "api", "rust", "axum"]
 categories = ["science", "mathematics", "api-bindings"]
 
+[features]
+default = ["symbolica-backend"]
+symbolica-backend = ["symbolica"]
+mathcore-backend = ["mathcore"]
+symb_anafis-backend = ["symb_anafis"]
+
 [dependencies]
+# Web + infra
 axum = { version = "0.7", features = ["macros", "json"] }
 tokio = { version = "1.40", features = ["rt-multi-thread", "macros"] }
 serde = { version = "1.0", features = ["derive"] }
@@ -20,14 +27,20 @@ tracing-subscriber = { version = "0.3", features = ["fmt", "env-filter"] }
 thiserror = "1.0"
 config = "0.14"
 
-# Symbolic math engine: swap or combine as needed
-symbolica = "0.1"        # example; check actual version on lib.rs/crates.io[web:3][web:7]
-symbolic_math = "0.3"    # simple symbolic math support[web:2]
-rusymbols = "0.2"        # symbolic algebra crate[web:5]
+# Symbolic backends (exact versions to pin after testing)
+symbolica = { version = "1.0", optional = true }    # core symbolic + matrix engine
+mathcore = { version = "0.3", optional = true }     # SymPy-like symbolic crate
+symb_anafis = { version = "0.1", optional = true }  # high-performance symbolic math
+symbolic_math = { version = "0.3" }                 # light symbolic toolkit
+rusymbols = { version = "0.2" }                     # symbolic algebra crate
 
-# Linear algebra / numeric crates; pick appropriate ones from Rust ecosystem.[web:3][web:7][web:9]
+# Linear algebra / numeric
+nalgebra = "0.33"
 ndarray = { version = "0.15", features = ["serde"] }
 ndarray-linalg = "0.16"
+
+# Scientific computing / ODEs (optional)
+rusted_sci_the = { version = "0.2", optional = true }
 
 [dev-dependencies]
 reqwest = { version = "0.12", features = ["json"] }
