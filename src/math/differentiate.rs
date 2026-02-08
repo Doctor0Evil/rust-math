@@ -1,12 +1,14 @@
 use crate::error::AppError;
-use symbolica::atom::Atom;
+use super::backend::{SymbolicBackend, symbolica_backend::SymbolicaBackend};
+use super::parse::Expr;
 
-pub fn differentiate_expression(expr: &Atom, var: &str, order: u8) -> Result<Atom, AppError> {
-    let mut result = expr.clone();
-    for _ in 0..order {
-        result = result
-            .derivative(var)
-            .map_err(|e| AppError::MathError(format!("Derivative error: {}", e)))?;
+pub fn differentiate_expression(
+    expr: &Expr,
+    var: &str,
+    order: u8,
+) -> Result<Expr, AppError> {
+    if var.trim().is_empty() {
+        return Err(AppError::BadRequest("missing differentiation variable".into()));
     }
-    Ok(result)
+    SymbolicaBackend::differentiate(expr, var, order)
 }
