@@ -1,0 +1,35 @@
+[package]
+name = "rust-math"
+version = "0.1.0"
+edition = "2021"
+description = "Public Rust-based math service for symbolic and numeric computations, designed for AI-chat integration."
+license = "MIT"
+repository = "https://github.com/your-org/rust-math"
+keywords = ["math", "symbolic", "api", "rust", "axum"]
+categories = ["science", "mathematics", "api-bindings"]
+
+[dependencies]
+axum = { version = "0.7", features = ["macros", "json"] }
+tokio = { version = "1.40", features = ["rt-multi-thread", "macros"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tower = "0.4"
+tower-http = { version = "0.5", features = ["trace", "cors"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["fmt", "env-filter"] }
+thiserror = "1.0"
+config = "0.14"
+
+# Symbolic math engine: swap or combine as needed
+symbolica = "0.1"        # example; check actual version on lib.rs/crates.io[web:3][web:7]
+symbolic_math = "0.3"    # simple symbolic math support[web:2]
+rusymbols = "0.2"        # symbolic algebra crate[web:5]
+
+# Linear algebra / numeric crates; pick appropriate ones from Rust ecosystem.[web:3][web:7][web:9]
+ndarray = { version = "0.15", features = ["serde"] }
+ndarray-linalg = "0.16"
+
+[dev-dependencies]
+reqwest = { version = "0.12", features = ["json"] }
+tokio = { version = "1.40", features = ["rt-multi-thread", "macros"] }
+serde_json = "1.0"
